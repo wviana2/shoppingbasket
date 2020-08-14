@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Shopping Basket Application</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+  </head>
+
+  <body>
+    <h1>Customer Basket List</h1>
+
+	<div th:if="${baskets.size() == 0}">
+           <div>No Basket Was Created Yet.</div>
+    </div>
+
+    <form method="POST" th:object="${showBasketList}">
+
+
+    <div class="grid">
+	  <div class="basket-group" id="basketList">
+      <div th:each="basket : ${baskets}">
+      	<div class="container">
+	        <ul>
+	        <li><img width="50" height="40" th:src="@{/images/basket03.jpg}"/>
+	        <span style="width:150px;" th:text="${basket.basketName}" >CONTAINER</span>
+	        <span style="width:150px;" th:text="${basket.basketTotal}" >CONTAINER</span>
+	        <span style="width:150px;"><a th:href="@{'/showBasketList/basketItems/{id}'(id=${basket.basketId})}">Open Basket</a></span></li>
+	        </ul>
+	    </div>
+      </div>
+      		<br/>
+      		Grand Total:&nbsp;<span style="width:150px;" th:text="${grandTotal}" >CONTAINER</span>
+      </div>
+      
+    </div>
+
+    <div class="container">
+    <br/>
+      <span style="width:150px;"><a th:href="@{/showBasketList/createBasket}" >Create a Basket</a></span>
+      <span style="width:150px;"><a th:href="@{/showBasketList/clear}" >Clear</a></span>
+    </div>
+    </form>
+  </body>
+</html>

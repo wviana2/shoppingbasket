@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Shopping Basket Application</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+  </head>
+
+  <body>
+	<h2>Basket No. <span style="width:150px;" th:text="${currentBasket.basketId}" >CONTAINER</span></h2>
+
+
+
+    <div class="grid">
+      <div th:if="${basketItems.size() == 0}">
+           <div>Basket is Empty</div>
+      </div>
+
+	  <div class="basket-item-group" id="basketItem">
+      <div th:each="item : ${basketItems}">
+      	<div class="container">
+	        <ul>
+	        <li><img width="60" height="40" th:src="@{/images/grocery01.jpg}"/>
+	        <span style="width:40px;" th:text="${item.itemId}" >CONTAINER</span>
+	        <span style="width:150px;" th:text="${item.name}" >CONTAINER</span>
+	        <span style="width:150px;" th:text="${item.description}" >CONTAINER</span>
+	        <span style="width:150px;" th:text="${item.price}" >CONTAINER</span>
+	        <span style="width:150px;"><a th:href="@{'/showBasketList/removeItem/{id}'(id=${item.itemId})}">Remove Item</a></span>
+	        </li>
+	        </ul>
+	    </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="container">
+    <br/>
+      <span style="width:150px;"><a th:href="@{'/showBasketList/itemList/{id}'(id=${currentBasket.basketId})}" >Add Item</a></span>
+      <span style="width:150px;"><a th:href="@{/showBasketList/basketList}" >Show Basket List</a></span>
+    </div>
+  </body>
+</html>
