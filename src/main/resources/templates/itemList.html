@@ -8,30 +8,31 @@
 
   <body>
     <h1>Item List</h1>
+	<br/>
+	
+	<table>   
+	  <tr>
+	  		<th>Item ID</th>
+	  		<th>Item Name</th>
+	  		<th>Item Description</th>
+	  		<th>Price</th>
+	  		<th>Add Item</th>
+	  </tr>
 
-    <form method="POST" th:object="${showBasketList}">
-
-
-    <div class="grid">
-	  <div class="item-group" id="itemList">
       <div th:each="item : ${items}">
-      	<div class="container">
-	        <ul>
-	        <li><img width="60" height="40" th:src="@{/images/grocery01.jpg}"/>
-	        <span style="width:40px;" th:text="${item.itemId}" >CONTAINER</span>
-	        <span style="width:150px;" th:text="${item.name}" >CONTAINER</span>
-	        <span style="width:150px;" th:text="${item.description}" >CONTAINER</span>
-	        <span style="width:150px;" th:text="${item.price}" >CONTAINER</span>
-	        <span style="width:150px;"><a th:href="@{'/showBasketList/addItem/{id}'(id=${item.itemId})}">Add Item</a></span>
-	        </li>
-	        </ul>
-	    </div>
+	      <tr>
+				
+		        <td><img width="60" height="40" th:src="@{/images/grocery01.jpg}"/>
+		        <span style="width:40px;" th:text="${item.itemId}" >CONTAINER</span></td>
+		        <td><span style="width:150px;" th:text="${item.name}" >CONTAINER</span></td>
+		        <td><span style="width:150px;" th:text="${item.description}" >CONTAINER</span></td>
+		        <td><span style="width:150px;" th:text="${item.price}" >CONTAINER</span></td>
+		        <td><span style="width:150px;"><a th:href="@{'/showBasketList/addItem/{id}'(id=${item.itemId})}"><button>Add Item</button></a></span></td>
+	      </tr>
       </div>
-      </div>
-      
-    </div>
+    </table>
 
 
-    </form>
+
   </body>
 </html>

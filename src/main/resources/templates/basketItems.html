@@ -7,36 +7,45 @@
   </head>
 
   <body>
-	<h2>Basket No. <span style="width:150px;" th:text="${currentBasket.basketId}" >CONTAINER</span></h2>
+	<h2>Basket Name:&nbsp;<span style="width:150px;" th:text="${currentBasket.name}" >CONTAINER</span></h2>
 
 
 
-    <div class="grid">
+
       <div th:if="${basketItems.size() == 0}">
            <div>Basket is Empty</div>
       </div>
-
-	  <div class="basket-item-group" id="basketItem">
+	<br/>
+	
+	<table>   
+	  <tr>
+	  		<th>Item ID</th>
+	  		<th>Item Name</th>
+	  		<th>Item Description</th>
+	  		<th>Item Price</th>
+	  		<th>Remove</th>
+	  </tr>
+	 
       <div th:each="item : ${basketItems}">
-      	<div class="container">
-	        <ul>
-	        <li><img width="60" height="40" th:src="@{/images/grocery01.jpg}"/>
-	        <span style="width:40px;" th:text="${item.itemId}" >CONTAINER</span>
-	        <span style="width:150px;" th:text="${item.name}" >CONTAINER</span>
-	        <span style="width:150px;" th:text="${item.description}" >CONTAINER</span>
-	        <span style="width:150px;" th:text="${item.price}" >CONTAINER</span>
-	        <span style="width:150px;"><a th:href="@{'/showBasketList/removeItem/{id}'(id=${item.itemId})}">Remove Item</a></span>
-	        </li>
-	        </ul>
-	    </div>
+      	
+	       <tr>  
+	        <td><img width="60" height="40" th:src="@{/images/grocery01.jpg}"/>
+	        <span style="width:40px;" th:text="${item.itemId}" >CONTAINER</span></td>
+	        <td><span style="width:150px;" th:text="${item.name}" >CONTAINER</span></td>
+	        <td><span style="width:150px;" th:text="${item.description}" >CONTAINER</span></td>
+	        <td><span style="width:150px;" th:text="${item.price}" >CONTAINER</span></td>
+	        <td><span style="width:150px;"><a th:href="@{'/showBasketList/removeItem/{id}'(id=${item.itemId})}"><button>Remove Item</button></a></span></td>
+	       </tr>
+	        
+	    
       </div>
-      </div>
-    </div>
+    </table> 
+
 
     <div class="container">
     <br/>
-      <span style="width:150px;"><a th:href="@{'/showBasketList/itemList/{id}'(id=${currentBasket.basketId})}" >Add Item</a></span>
-      <span style="width:150px;"><a th:href="@{/showBasketList/basketList}" >Show Basket List</a></span>
+      <span style="width:150px;"><a th:href="@{/showBasketList/itemList}" ><button>Add Item</button></a></span>
+      <span style="width:150px;"><a th:href="@{/showBasketList/basketList}" ><button>Show Basket List</button></a></span>
     </div>
   </body>
 </html>
