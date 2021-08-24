@@ -11,32 +11,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import javax.validation.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+
+//@Data
 @Entity
 @Table(name="items")
 @EntityListeners(AuditingEntityListener.class)
 public class Item implements Serializable {
 	
+	private static final long serialVersionUID = -1766963228672417439L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long itemId;
 	
-	@NotBlank
 	private String name;
 	
-	@NotBlank
 	private String description;
 	
-	@NotBlank
 	private Double price;
 	
 	@ManyToOne
 	@JoinColumn(name = "basket_id", nullable=false)
 	private Basket basket;
 
-	
 	public Long getItemId() {
 		return itemId;
 	}
