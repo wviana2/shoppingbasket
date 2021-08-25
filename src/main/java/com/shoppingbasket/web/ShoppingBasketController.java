@@ -161,7 +161,7 @@ public class ShoppingBasketController {
 	@GetMapping(value = "/basketItems/{id}")
 	public String basketItems(@PathVariable("id") int id, HttpSession session, Model model) {
 		logger.info("calling basketItems()...");
-		logger.info("Basket id: " + id);
+		logger.info("Basket id: {}", id);
 
 		Basket basket = null;
 		List<Basket> baskets = basketRepository.findAll();
