@@ -170,7 +170,7 @@ public class ShoppingBasketController {
 			baskets = new ArrayList<Basket>();
 		}
 
-		logger.info("Baskets: " + baskets);
+		logger.info("Baskets: {}", baskets);
 
 		if (baskets != null) {
 			for (Basket b : baskets) {
@@ -181,7 +181,7 @@ public class ShoppingBasketController {
 			}
 		}
 
-		logger.info("Current basket: " + basket);
+		logger.info("Current basket: {}", basket);
 
 		session.setAttribute("currentBasket", basket);
 		model.addAttribute("currentBasket", basket);
