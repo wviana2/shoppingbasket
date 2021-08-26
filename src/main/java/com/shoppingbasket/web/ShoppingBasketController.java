@@ -220,7 +220,7 @@ public class ShoppingBasketController {
 	@GetMapping(value = "/removeItem/{id}")
 	public String removeItemFromBasket(@PathVariable("id") int id, HttpSession session, Model model) {
 		log.info("calling removeItemFromBasket()...");
-		log.info("Item id: " + id);
+		log.info("Item id: {}", id);
 
 		itemRepository.deleteById(Long.valueOf(id));
 
