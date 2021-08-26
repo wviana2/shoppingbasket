@@ -194,7 +194,7 @@ public class ShoppingBasketController {
 	@GetMapping(value = "/addItem/{id}")
 	public String addItemToBasket(@PathVariable("id") int id, HttpSession session, Model model) {
 		logger.info("calling addItemToBasket()...");
-		logger.info("Item id: " + id);
+		logger.info("Item id: {}", id);
 
 		Item selectedItem = null;
 		List<Item> items = service.getItems();
