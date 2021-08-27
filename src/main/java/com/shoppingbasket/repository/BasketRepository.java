@@ -1,11 +1,13 @@
 package com.shoppingbasket.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import com.shoppingbasket.model.Basket;
 
-@Repository
-public interface BasketRepository extends JpaRepository <Basket, Long> {
+public interface BasketRepository {
 
+	List<Basket> findAll();
+	void save(Basket basket);
+	void deleteAll();
+	Basket getOne(long id);
 }

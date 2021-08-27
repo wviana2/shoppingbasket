@@ -87,9 +87,12 @@ public class ShoppingBasketController {
 		if (errors.hasErrors()) {
 			return "addBasket";
 		}
-
+		
+		basket.setId(Long.valueOf(basketRepository.findAll().size() + 1));
+		
 		basketRepository.save(basket);
-
+		logger.info("Basket saved: {}", basket);
+		
 		DecimalFormat df = new DecimalFormat("#.##");
 		double grandTotal = 0;
 
@@ -180,6 +183,12 @@ public class ShoppingBasketController {
 				}
 			}
 		}
+		
+		basket.setItems(this.itemRepository.findAll(basket.getId()));
+		
+		if(basket.getItems() == null) {
+			basket.setItems(new ArrayList<Item>());
+		}
 
 		logger.info("Current basket: {}", basket);
 
@@ -206,9 +215,10 @@ public class ShoppingBasketController {
 		}
 
 		Basket b = (Basket) session.getAttribute("currentBasket");
-		selectedItem.setBasket(b);
+		selectedItem.setBasket(b);		
 		itemRepository.save(selectedItem);
 		Basket basket = basketRepository.getOne(b.getId());
+		basket.setItems(itemRepository.findAll(basket.getId()));
 		model.addAttribute("basketItems", basket.getItems());
 		model.addAttribute("currentBasket", basket);
 
@@ -226,6 +236,7 @@ public class ShoppingBasketController {
 
 		Basket b = (Basket) session.getAttribute("currentBasket");
 		Basket basket = basketRepository.getOne(b.getId());
+		basket.setItems(itemRepository.findAll(basket.getId()));
 		model.addAttribute("basketItems", basket.getItems());
 		model.addAttribute("currentBasket", basket);
 

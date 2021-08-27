@@ -1,30 +1,8 @@
 package com.shoppingbasket.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import lombok.Data;
-
-//@Data
-@Entity
-@Table(name="items")
-@EntityListeners(AuditingEntityListener.class)
-public class Item implements Serializable {
+public class Item {
 	
-	private static final long serialVersionUID = -1766963228672417439L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long itemId;
 	
 	private String name;
@@ -33,8 +11,6 @@ public class Item implements Serializable {
 	
 	private Double price;
 	
-	@ManyToOne
-	@JoinColumn(name = "basket_id", nullable=false)
 	private Basket basket;
 
 	public Long getItemId() {
