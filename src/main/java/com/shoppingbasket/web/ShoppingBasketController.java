@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
@@ -25,16 +27,13 @@ import com.shoppingbasket.repository.BasketRepository;
 import com.shoppingbasket.repository.ItemRepository;
 import com.shoppingbasket.service.ShoppingBasketService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @Scope("session")
 @RequestMapping("/showBasketList")
 public class ShoppingBasketController {
 
-	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ShoppingBasketController.class);
-
+	private static final Logger logger = LogManager.getLogger(ShoppingBasketController.class);
+	
 	@Autowired
 	private ShoppingBasketService service;
 
@@ -50,7 +49,7 @@ public class ShoppingBasketController {
 
 	@GetMapping(value = "/basketList")
 	public String basketList(Model model) {
-		log.info("calling basketList()...");
+		logger.info("calling basketList()...");
 		DecimalFormat df = new DecimalFormat("#.##");
 		double grandTotal = 0;
 
@@ -67,7 +66,7 @@ public class ShoppingBasketController {
 		model.addAttribute("grandTotal", grandTotal);
 		model.addAttribute("baskets", baskets);
 
-		log.info("exiting basketList()...");
+		logger.info("exiting basketList()...");
 
 		return "showBasketList";
 	}
@@ -81,9 +80,9 @@ public class ShoppingBasketController {
 	@PostMapping(path = "/createBasket", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 	public String createBasket(@Valid Basket basket, Model model, Errors errors) {
 
-		log.info("POST CreateBasket Basket0: " + basket);
-		log.info("Errors: " + errors);
-		log.info("Errors: " + errors.hasErrors());
+		logger.info("POST CreateBasket Basket0: " + basket);
+		logger.info("Errors: {}", errors);
+		logger.info("Errors: {}", errors.hasErrors());
 
 		if (errors.hasErrors()) {
 			return "addBasket";
@@ -161,8 +160,8 @@ public class ShoppingBasketController {
 
 	@GetMapping(value = "/basketItems/{id}")
 	public String basketItems(@PathVariable("id") int id, HttpSession session, Model model) {
-		log.info("calling basketItems()...");
-		log.info("Basket id: " + id);
+		logger.info("calling basketItems()...");
+		logger.info("Basket id: {}", id);
 
 		Basket basket = null;
 		List<Basket> baskets = basketRepository.findAll();
@@ -171,7 +170,7 @@ public class ShoppingBasketController {
 			baskets = new ArrayList<Basket>();
 		}
 
-		log.info("Baskets: " + baskets);
+		logger.info("Baskets: {}", baskets);
 
 		if (baskets != null) {
 			for (Basket b : baskets) {
@@ -182,20 +181,20 @@ public class ShoppingBasketController {
 			}
 		}
 
-		log.info("Current basket: " + basket);
+		logger.info("Current basket: {}", basket);
 
 		session.setAttribute("currentBasket", basket);
 		model.addAttribute("currentBasket", basket);
 		model.addAttribute("basketItems", basket.getItems());
 
-		log.info("exiting basketItems()...");
+		logger.info("exiting basketItems()...");
 		return "basketItems";
 	}
 
 	@GetMapping(value = "/addItem/{id}")
 	public String addItemToBasket(@PathVariable("id") int id, HttpSession session, Model model) {
-		log.info("calling addItemToBasket()...");
-		log.info("Item id: " + id);
+		logger.info("calling addItemToBasket()...");
+		logger.info("Item id: {}", id);
 
 		Item selectedItem = null;
 		List<Item> items = service.getItems();
@@ -213,12 +212,13 @@ public class ShoppingBasketController {
 		model.addAttribute("basketItems", basket.getItems());
 		model.addAttribute("currentBasket", basket);
 
-		log.info("exiting addItemToBasket()...");
+		logger.info("exiting addItemToBasket()...");
 		return "basketItems";
 	}
 
 	@GetMapping(value = "/removeItem/{id}")
 	public String removeItemFromBasket(@PathVariable("id") int id, HttpSession session, Model model) {
+
 		log.info("calling removeItemFromBasket()...");
 		log.info("Item id: {}", id);
 
@@ -229,7 +229,7 @@ public class ShoppingBasketController {
 		model.addAttribute("basketItems", basket.getItems());
 		model.addAttribute("currentBasket", basket);
 
-		log.info("exiting removeItemFromBasket()...");
+		logger.info("exiting removeItemFromBasket()...");
 		return "basketItems";
 	}
 

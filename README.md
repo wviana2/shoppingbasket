@@ -16,7 +16,7 @@
   
    mvn spring-boot:run
 
-5. For first time run this could take sometime as it will download some dependences. You will see something like below in the standard output indicating that the app has already started:
+5. For first time run this could take sometime as it will download some dependences. You will see something like below in the standard output, indicating that the app has already started:
 
 2020-08-14 09:17:34.232  INFO 18384 --- [  restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
 2020-08-14 09:17:34.241  INFO 18384 --- [  restartedMain] c.s.ShoppingBasketApplication            : Started ShoppingBasketApplication in 3.922 seconds (JVM running for 4.225)
