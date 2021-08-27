@@ -6,10 +6,8 @@
 
 * Running the Application
 
-1. Create "shoppingbasket" schema in mysql. Also, set the mysql username and password as the following:
-       username: root
-       password: root
-2. Download the shoppingbasket code and extract it to your local directory.
+1. Install Oracle XE 18c.
+2. Download the shoppingbasket code and extract it to your local directory. Add the Oracle XE database connection configuration to the application.properties. 
 
 3. cd to the shoppingbasket project directory (to the location of pom.xml)
 4. Type the following in the command line and hit enter key: 
