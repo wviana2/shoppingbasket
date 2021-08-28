@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,7 +77,7 @@ public class ShoppingBasketController {
 	}
 
 	@PostMapping(path = "/createBasket", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-	public String createBasket(@Valid Basket basket, Model model, Errors errors) {
+	public String createBasket(Basket basket, Model model, Errors errors) {
 
 		logger.info("POST CreateBasket Basket0: " + basket);
 		logger.info("Errors: {}", errors);
