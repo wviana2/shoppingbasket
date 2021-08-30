@@ -2,43 +2,49 @@ package com.shoppingbasket.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
-//@Data
 @Entity
-@Table(name="baskets")
+@Table(name="BASKETS")
 @EntityListeners(AuditingEntityListener.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class)
 public class Basket implements Serializable {
 	
 	private static final long serialVersionUID = -149357598196063644L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Type(type = "uuid-char")
+	@Column(nullable = false, name = "BASKET_ID")
+	@GeneratedValue
+	private UUID basketId;
 	
+	@Column(nullable = false, name = "NAME")
 	private String name;
 	
 	@OneToMany(targetEntity=Item.class, mappedBy="basket")
 	private List<Item> items;
 
-	public Long getId() {
-		return id;
+	public UUID getBasketId() {
+		return basketId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setBasketId(UUID basketId) {
+		this.basketId = basketId;
 	}
 
 	public String getName() {
