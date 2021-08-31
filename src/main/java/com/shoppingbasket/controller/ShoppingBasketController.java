@@ -27,7 +27,7 @@ public class ShoppingBasketController {
 	private ShoppingBasketService shoppingBasketService;
 
 	@CrossOrigin
-	@GetMapping(value = "/getbasketlist")
+	@GetMapping("/getbasketlist")
 	public List<Basket> getBasketList(Model model) {
 		logger.info("calling basketList()...");
 
@@ -35,32 +35,32 @@ public class ShoppingBasketController {
 	}
 
 	@CrossOrigin
-	@PostMapping(value = "/createbasket")
+	@PostMapping("/createbasket")
 	public Basket createBasket(@RequestBody Basket basket) {
 		return shoppingBasketService.createBasket(basket);
 	}
 	
 	@CrossOrigin
-	@GetMapping(value = "/getbasket")
+	@GetMapping("/getbasket")
 	public Basket getBasket(@RequestBody Basket basket) {
 		return shoppingBasketService.getBasket(basket);
 	}
 
 	@CrossOrigin
-	@PostMapping(value = "/removebasket")
+	@PostMapping("/removebasket")
 	public void removeBasket(@RequestBody Basket basket) {
 		shoppingBasketService.removeBasket(basket);
 	}
 
 	@CrossOrigin
-	@GetMapping(value = "/getitemlist")
+	@GetMapping("/getitemlist")
 	public List<Item> getItemList(Model model) {
 
 		return shoppingBasketService.getItems();
 	}
 
 	@CrossOrigin
-	@PostMapping(value = "/additem")
+	@PostMapping("/additem")
 	public Item addItem(@RequestBody Item item) {
 		logger.info("calling additem()...");
 		logger.info("Item : {}", item);
@@ -69,7 +69,7 @@ public class ShoppingBasketController {
 	}
 
 	@CrossOrigin
-	@PostMapping(value = "/removeitem")
+	@PostMapping("/removeitem")
 	public void removeItem(@RequestBody Item item) {
 
 		logger.info("calling removeitem()...");
