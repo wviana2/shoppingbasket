@@ -18,7 +18,7 @@ import lombok.Data;
 
 //@Data
 @Entity
-@Table(name="baskets")
+@Table(name="BASKETS")
 @EntityListeners(AuditingEntityListener.class)
 public class Basket implements Serializable {
 	
@@ -26,19 +26,19 @@ public class Basket implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long basketId;
 	
 	private String name;
 	
 	@OneToMany(targetEntity=Item.class, mappedBy="basket")
 	private List<Item> items;
 
-	public Long getId() {
-		return id;
+	public Long getBasketId() {
+		return basketId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setBasketId(Long basketId) {
+		this.basketId = basketId;
 	}
 
 	public String getName() {

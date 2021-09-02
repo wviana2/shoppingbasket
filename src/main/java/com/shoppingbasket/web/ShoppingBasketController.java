@@ -174,7 +174,7 @@ public class ShoppingBasketController {
 
 		if (baskets != null) {
 			for (Basket b : baskets) {
-				if (b.getId() == id) {
+				if (b.getBasketId() == id) {
 					basket = b;
 					break;
 				}
@@ -208,7 +208,7 @@ public class ShoppingBasketController {
 		Basket b = (Basket) session.getAttribute("currentBasket");
 		selectedItem.setBasket(b);
 		itemRepository.save(selectedItem);
-		Basket basket = basketRepository.getOne(b.getId());
+		Basket basket = basketRepository.getOne(b.getBasketId());
 		model.addAttribute("basketItems", basket.getItems());
 		model.addAttribute("currentBasket", basket);
 
@@ -225,7 +225,7 @@ public class ShoppingBasketController {
 		itemRepository.deleteById(Long.valueOf(id));
 
 		Basket b = (Basket) session.getAttribute("currentBasket");
-		Basket basket = basketRepository.getOne(b.getId());
+		Basket basket = basketRepository.getOne(b.getBasketId());
 		model.addAttribute("basketItems", basket.getItems());
 		model.addAttribute("currentBasket", basket);
 

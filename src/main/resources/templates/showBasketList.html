@@ -27,7 +27,7 @@
 	        <td><img width="50" height="40" th:src="@{/images/basket03.jpg}"/>
 	        <span th:text="${basket.name}" >CONTAINER</span></td>
 	        <td><span th:text="${basket.basketTotal}" >CONTAINER</span></td>
-	        <td><span><a th:href="@{'/showBasketList/basketItems/{id}'(id=${basket.id})}"><button>Open Basket</button></a></span></td>
+	        <td><span><a th:href="@{'/showBasketList/basketItems/{id}'(id=${basket.basketId})}"><button>Open Basket</button></a></span></td>
 	        
 	   </tr> 
       </div>

@@ -17,7 +17,7 @@ import lombok.Data;
 
 //@Data
 @Entity
-@Table(name="items")
+@Table(name="ITEMS")
 @EntityListeners(AuditingEntityListener.class)
 public class Item implements Serializable {
 	
@@ -34,7 +34,7 @@ public class Item implements Serializable {
 	private Double price;
 	
 	@ManyToOne
-	@JoinColumn(name = "basket_id", nullable=false)
+	@JoinColumn(name = "BASKET_ID", nullable=false)
 	private Basket basket;
 
 	public Long getItemId() {
